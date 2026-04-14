@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0d9488; /* Surgical Teal - Highly trusted modern medical color */
+  --secondary: #f0fdfa; /* Ultra-soft teal highlight */
+  --accent: #1e293b; /* Deep Navy Blue for strong contrast */
+  --text: #0f172a; /* Slate 900 */
+  --text-muted: #64748b; /* Slate 500 */
+  --card-bg: rgba(255, 255, 255, 0.98);
+  --border-color: rgba(203, 213, 225, 0.6);
+  --bg-gray: #f8fafc;
+}
+
+body {
+  background-color: #f8fafc;
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glass Panel Styling */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Glass Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+.bg-light {
+  background-color: var(--bg-gray);
+}
