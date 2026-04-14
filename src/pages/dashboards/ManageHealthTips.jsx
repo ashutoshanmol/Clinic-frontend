@@ -20,7 +20,7 @@ const ManageHealthTips = () => {
 
   const fetchTips = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/blog');
+      const res = await axios.get('/api/blog');
       setTips(res.data);
       setLoading(false);
     } catch (err) {
@@ -44,10 +44,10 @@ const ManageHealthTips = () => {
     setSubmitLoading(true);
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/blog/${editId}`, formData);
+        await axios.put(`/api/blog/${editId}`, formData);
         alert('Health tip updated successfully');
       } else {
-        await axios.post('http://localhost:5000/api/blog', formData);
+        await axios.post('/api/blog', formData);
         alert('Health tip published successfully');
       }
       setShowForm(false);
@@ -71,7 +71,7 @@ const ManageHealthTips = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this article permanently?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/blog/${id}`);
+      await axios.delete(`/api/blog/${id}`);
       fetchTips();
     } catch (err) {
       alert('Error deleting article');

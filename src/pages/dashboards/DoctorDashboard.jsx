@@ -27,9 +27,9 @@ const DoctorDashboard = () => {
     try {
       if (!user.name) return;
       const [statsRes, apptRes, availRes] = await Promise.all([
-        axios.get(`http://localhost:5000/api/doctor/stats?doctorName=${encodeURIComponent(user.name)}`),
-        axios.get(`http://localhost:5000/api/doctor/appointments?doctorName=${encodeURIComponent(user.name)}`),
-        axios.get(`http://localhost:5000/api/doctor/availability?doctorEmail=${encodeURIComponent(user.email)}`)
+        axios.get(`/api/doctor/stats?doctorName=${encodeURIComponent(user.name)}`),
+        axios.get(`/api/doctor/appointments?doctorName=${encodeURIComponent(user.name)}`),
+        axios.get(`/api/doctor/availability?doctorEmail=${encodeURIComponent(user.email)}`)
       ]);
       setStats(statsRes.data);
       setAppointments(apptRes.data);
@@ -43,7 +43,7 @@ const DoctorDashboard = () => {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/api/doctor/appointments/${id}`, { status: newStatus });
+      await axios.patch(`/api/doctor/appointments/${id}`, { status: newStatus });
       fetchDashboardData(); // Refresh records
     } catch (err) {
       alert('Failed to update status');
@@ -52,7 +52,7 @@ const DoctorDashboard = () => {
 
   const loadPatientHistory = async (patientName) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/doctor/patient/${encodeURIComponent(patientName)}`);
+      const res = await axios.get(`/api/doctor/patient/${encodeURIComponent(patientName)}`);
       setSelectedPatient({ name: patientName, ...res.data });
       setActiveTab('Patient Details');
     } catch (err) {
@@ -70,7 +70,7 @@ const DoctorDashboard = () => {
     if (Object.keys(errors).length > 0) return;
 
     try {
-      await axios.put('http://localhost:5000/api/doctor/availability', { 
+      await axios.put('/api/doctor/availability', { 
         doctorEmail: user.email, 
         availability 
       });

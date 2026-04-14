@@ -13,7 +13,7 @@ const ManageStaff = () => {
 
   const fetchStaff = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/staff');
+      const res = await axios.get('/api/staff');
       setStaffList(res.data);
       setLoading(false);
     } catch (err) {
@@ -41,7 +41,7 @@ const ManageStaff = () => {
     if (Object.keys(errors).length > 0) return;
 
     try {
-      await axios.post('http://localhost:5000/api/staff', formData);
+      await axios.post('/api/staff', formData);
       setShowAddForm(false);
       setFormData({ name: '', email: '', password: '', phone: '', role: 'Receptionist', salary: '', address: '' });
       fetchStaff();
@@ -53,7 +53,7 @@ const ManageStaff = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this staff member?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/staff/${id}`);
+        await axios.delete(`/api/staff/${id}`);
         fetchStaff();
       } catch (err) {
         setError('Failed to delete staff');

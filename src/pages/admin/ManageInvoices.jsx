@@ -24,7 +24,7 @@ const ManageInvoices = () => {
   const fetchInvoices = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/invoices');
+      const res = await axios.get('/api/invoices');
       setInvoices(res.data);
     } catch (err) {
       console.error('Error fetching invoices:', err);
@@ -40,7 +40,7 @@ const ManageInvoices = () => {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/api/invoices/${id}`, { status: newStatus, paymentMethod: newStatus === 'Paid' ? 'Online' : '' });
+      await axios.patch(`/api/invoices/${id}`, { status: newStatus, paymentMethod: newStatus === 'Paid' ? 'Online' : '' });
       setInvoices(prev => prev.map(inv => inv._id === id ? { ...inv, status: newStatus } : inv));
     } catch (err) {
       alert('Failed to update invoice status');
@@ -61,7 +61,7 @@ const ManageInvoices = () => {
     setFormError('');
     setFormSuccess('');
     try {
-      await axios.post('http://localhost:5000/api/invoices', formData);
+      await axios.post('/api/invoices', formData);
       setFormSuccess('Invoice generated successfully!');
       setFormData({ patientName: '', patientEmail: '', doctorName: '', amount: '', notes: '' });
       fetchInvoices();

@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/admin/stats');
+        const res = await axios.get('/api/admin/stats');
         setStatsData(res.data);
         setLoading(false);
       } catch (err) {

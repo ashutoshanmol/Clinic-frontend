@@ -19,7 +19,7 @@ const ViewPatients = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/admin/patients');
+        const res = await axios.get('/api/admin/patients');
         setPatients(res.data);
         setLoading(false);
       } catch (err) {
@@ -46,10 +46,10 @@ const ViewPatients = () => {
     setError(null); setSuccess(null);
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/admin/patients/${editingId}`, formData);
+        await axios.put(`/api/admin/patients/${editingId}`, formData);
         setSuccess('Patient updated successfully!');
       } else {
-        await axios.post('http://localhost:5000/api/admin/patients', formData);
+        await axios.post('/api/admin/patients', formData);
         setSuccess('Patient added successfully!');
       }
       setFormData({ name: '', email: '', password: '', phone: '', age: '', gender: '', bloodGroup: '', address: '' });
@@ -76,7 +76,7 @@ const ViewPatients = () => {
   const handleDelete = async (id) => {
     if(window.confirm('Are you sure you want to delete this patient?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/patients/${id}`);
+        await axios.delete(`/api/admin/patients/${id}`);
         setSuccess('Patient deleted successfully!');
         fetchPatients();
       } catch (err) {

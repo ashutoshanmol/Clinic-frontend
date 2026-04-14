@@ -19,7 +19,7 @@ const Contact = () => {
     
     setStatus({ loading: true, error: null, success: null });
     try {
-      await axios.post('http://localhost:5000/api/public/contact', formData);
+      await axios.post('/api/public/contact', formData);
       setStatus({ loading: false, error: null, success: 'Thank you for your message. Our team will contact you shortly.' });
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (err) {

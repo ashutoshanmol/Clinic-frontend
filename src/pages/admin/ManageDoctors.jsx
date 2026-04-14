@@ -30,7 +30,7 @@ const ManageDoctors = () => {
 
   const fetchDoctors = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/doctors');
+      const res = await axios.get('/api/admin/doctors');
       setDoctors(res.data);
       setLoading(false);
     } catch (err) {
@@ -66,10 +66,10 @@ const ManageDoctors = () => {
     setSuccess(null);
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/admin/doctors/${editingId}`, formData);
+        await axios.put(`/api/admin/doctors/${editingId}`, formData);
         setSuccess('Doctor updated successfully!');
       } else {
-        await axios.post('http://localhost:5000/api/admin/doctors', formData);
+        await axios.post('/api/admin/doctors', formData);
         setSuccess('Doctor added successfully!');
       }
       setFormData({
@@ -101,7 +101,7 @@ const ManageDoctors = () => {
   const handleDelete = async (id) => {
     if(window.confirm('Are you sure you want to delete this doctor?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/doctors/${id}`);
+        await axios.delete(`/api/admin/doctors/${id}`);
         setSuccess('Doctor deleted successfully!');
         fetchDoctors();
       } catch (err) {

@@ -11,7 +11,7 @@ const ViewMessages = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/admin/messages');
+        const res = await axios.get('/api/admin/messages');
         setMessages(res.data);
         setLoading(false);
       } catch (err) {

@@ -29,7 +29,7 @@ const Register = () => {
     
     setStatus({ loading: true, error: null });
     try {
-      await axios.post('http://localhost:5000/api/public/register', {
+      await axios.post('/api/public/register', {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,

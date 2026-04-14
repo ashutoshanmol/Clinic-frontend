@@ -23,7 +23,7 @@ const Login = () => {
     if (Object.keys(errors).length > 0) return;
     
     try {
-      const response = await axios.post('http://localhost:5000/api/public/login', {
+      const response = await axios.post('/api/public/login', {
         email,
         password
       });

@@ -10,7 +10,7 @@ const HealthTipDetail = () => {
   useEffect(() => {
     const fetchTip = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/blog/${id}`);
+        const res = await axios.get(`/api/blog/${id}`);
         setTip(res.data);
         setLoading(false);
       } catch (err) {

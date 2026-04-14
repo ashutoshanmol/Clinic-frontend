@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     // Ping backend in background just to monitor status
-    axios.get('http://localhost:5000/api/test')
+    axios.get('/api/test')
       .then(response => {
         setApiStatus({ message: response.data.message, loading: false, error: false });
       })

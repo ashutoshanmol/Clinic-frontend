@@ -27,7 +27,7 @@ const BookAppointment = () => {
 
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/public/doctors');
+        const res = await axios.get('/api/public/doctors');
         setDbDoctors(res.data);
         setFetchingDoctors(false);
       } catch (err) {
@@ -88,7 +88,7 @@ const BookAppointment = () => {
     if (formData.paymentMethod === 'Online') {
       try {
         // 1. Create Order
-        const orderRes = await axios.post('http://localhost:5000/api/public/razorpay/order', { amount });
+        const orderRes = await axios.post('/api/public/razorpay/order', { amount });
         const { id: order_id, currency } = orderRes.data;
 
         // Simulator Fallback
@@ -96,7 +96,7 @@ const BookAppointment = () => {
           alert('Demo Mode: Using Razorpay Payment Simulator (To use real Razorpay, update .env keys)');
           setTimeout(async () => {
             try {
-              await axios.post('http://localhost:5000/api/public/razorpay/verify', {
+              await axios.post('/api/public/razorpay/verify', {
                 razorpay_order_id: order_id,
                 razorpay_payment_id: `pay_mock_${Date.now()}`,
                 razorpay_signature: 'mock_signature',
@@ -128,7 +128,7 @@ const BookAppointment = () => {
           handler: async (response) => {
             try {
               // 3. Verify Payment
-              await axios.post('http://localhost:5000/api/public/razorpay/verify', {
+              await axios.post('/api/public/razorpay/verify', {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
@@ -161,7 +161,7 @@ const BookAppointment = () => {
     } else {
       // Cash Payment Flow
       try {
-        await axios.post('http://localhost:5000/api/public/appointments', formData);
+        await axios.post('/api/public/appointments', formData);
         alert(`Appointment Confirmed! (Cash Payment - Pending)`);
         navigate('/dashboard/patient');
       } catch (err) {

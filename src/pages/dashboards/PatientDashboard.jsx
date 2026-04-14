@@ -41,7 +41,7 @@ const PatientDashboard = () => {
   const fetchDashboardData = async () => {
     try {
       if (!user.email) return;
-      const res = await axios.get(`http://localhost:5000/api/patient/dashboard?email=${encodeURIComponent(user.email)}`);
+      const res = await axios.get(`/api/patient/dashboard?email=${encodeURIComponent(user.email)}`);
       setAppointments(res.data.appointments);
       setPrescriptions(res.data.prescriptions);
       setInvoices(res.data.invoices);
@@ -55,7 +55,7 @@ const PatientDashboard = () => {
 
   const fetchDoctors = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/patient/doctors');
+      const res = await axios.get('/api/patient/doctors');
       setAvailableDoctors(res.data);
     } catch (err) {
       console.error('Error fetching doctors:', err);
@@ -65,7 +65,7 @@ const PatientDashboard = () => {
   const handleCancelAppointment = async (id) => {
     if (!window.confirm('Are you sure you want to cancel this appointment?')) return;
     try {
-      await axios.patch(`http://localhost:5000/api/patient/appointments/${id}/cancel`, { email: user.email });
+      await axios.patch(`/api/patient/appointments/${id}/cancel`, { email: user.email });
       alert('Appointment cancelled successfully');
       fetchDashboardData();
     } catch (err) {
@@ -111,7 +111,7 @@ const PatientDashboard = () => {
       };
 
       if (bookingForm.paymentMethod === 'Online') {
-        const orderRes = await axios.post('http://localhost:5000/api/public/razorpay/order', { amount });
+        const orderRes = await axios.post('/api/public/razorpay/order', { amount });
         const { id: order_id, currency } = orderRes.data;
 
         // Simulator Fallback
@@ -120,7 +120,7 @@ const PatientDashboard = () => {
           setBookingLoading(true);
           setTimeout(async () => {
             try {
-              await axios.post('http://localhost:5000/api/public/razorpay/verify', {
+              await axios.post('/api/public/razorpay/verify', {
                 razorpay_order_id: order_id,
                 razorpay_payment_id: `pay_mock_${Date.now()}`,
                 razorpay_signature: 'mock_signature',
@@ -154,7 +154,7 @@ const PatientDashboard = () => {
           order_id: order_id,
           handler: async (response) => {
             try {
-              await axios.post('http://localhost:5000/api/public/razorpay/verify', {
+              await axios.post('/api/public/razorpay/verify', {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
@@ -180,7 +180,7 @@ const PatientDashboard = () => {
         rzp.open();
         setBookingLoading(false);
       } else {
-        await axios.post('http://localhost:5000/api/public/appointments', payload);
+        await axios.post('/api/public/appointments', payload);
         alert('Appointment request submitted successfully!');
         setBookingForm({ doctor: '', date: '', time: '', symptoms: '', paymentMethod: 'Cash' });
         fetchDashboardData();
@@ -203,7 +203,7 @@ const PatientDashboard = () => {
 
     setUpdateLoading(true);
     try {
-      const res = await axios.put(`http://localhost:5000/api/public/profile/${user.email}`, editData);
+      const res = await axios.put(`/api/public/profile/${user.email}`, editData);
       const updatedUser = { ...user, ...res.data.user };
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setUser(updatedUser);

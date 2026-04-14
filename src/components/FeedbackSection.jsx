@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const API = 'http://localhost:5000/api/public';
+const API = '/api/public';
 
 // --- Star Rating Component ---
 const StarRating = ({ value, onChange, readOnly = false, size = 28 }) => {

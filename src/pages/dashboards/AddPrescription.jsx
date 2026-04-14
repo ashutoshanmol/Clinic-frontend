@@ -67,7 +67,7 @@ const AddPrescription = () => {
     setSuccess('');
 
     try {
-      await axios.post('http://localhost:5000/api/prescriptions', {
+      await axios.post('/api/prescriptions', {
         patientEmail: formData.patientEmail,
         doctorName: user.name || 'Doctor',
         date: new Date().toISOString().split('T')[0],

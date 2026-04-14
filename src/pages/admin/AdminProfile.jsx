@@ -25,7 +25,7 @@ const AdminProfile = () => {
 
     setMessage(''); setError('');
     try {
-      const res = await axios.put('http://localhost:5000/api/admin/profile', {
+      const res = await axios.put('/api/admin/profile', {
         email: user.email,
         name: profileData.name
       });
@@ -50,7 +50,7 @@ const AdminProfile = () => {
 
     setMessage(''); setError('');
     try {
-      const res = await axios.put('http://localhost:5000/api/admin/change-password', {
+      const res = await axios.put('/api/admin/change-password', {
         email: user.email,
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword

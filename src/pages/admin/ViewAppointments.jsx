@@ -11,7 +11,7 @@ const ViewAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/admin/appointments');
+        const res = await axios.get('/api/admin/appointments');
         setAppointments(res.data);
         setLoading(false);
       } catch (err) {
@@ -25,7 +25,7 @@ const ViewAppointments = () => {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/api/admin/appointments/${id}`, { status: newStatus });
+      await axios.patch(`/api/admin/appointments/${id}`, { status: newStatus });
       setAppointments(prev => prev.map(apt => apt._id === id ? { ...apt, status: newStatus } : apt));
     } catch (err) {
       console.error('Error updating status:', err);
@@ -36,7 +36,7 @@ const ViewAppointments = () => {
   const handleDelete = async (id) => {
     if(window.confirm('Are you sure you want to permanently delete this appointment?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/appointments/${id}`);
+        await axios.delete(`/api/admin/appointments/${id}`);
         setAppointments(prev => prev.filter(apt => apt._id !== id));
       } catch (err) {
         console.error('Error deleting appointment:', err);
